@@ -7,3 +7,10 @@ class Post(models.Model):
     content = models.TextField()
     is_published = models.BooleanField()
     publish_date = models.DateTimeField(auto_now_add=True)
+
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=512)
+    content = models.TextField()

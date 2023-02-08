@@ -11,6 +11,8 @@ urlpatterns = [ #<blog_id> represent object's id changes depends on which blog I
     path("details/<blog_id>/", views.blog_details, name="details_page"),
     path("update/<blog_id>/", views.update, name="update_page"),
     path("delete/<blog_id>", views.delete_blog, name="delete_page"),
-    path("search/", views.search, name="search_page")
+    path("search/", views.search, name="search_page"),
+    path("review/add/<blog_id>/", views.add_review, name="add_review"),
+
 
 ]
