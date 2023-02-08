@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import Post, Comment
+from .models import Post
 
 # Create your views here.
 
@@ -36,9 +36,8 @@ def dark(request : HttpRequest):
 
 def blog_details(request : HttpRequest, blog_id):
     blog = Post.objects.get(id = blog_id)
-    comments = Comment.objects.filter(post=blog)
 
-    return render(request, "main/Blog_details.html", {"blog" : blog, "comments" : comments})
+    return render(request, "main/Blog_details.html", {"blog" : blog})
 
 
 def update(request : HttpRequest, blog_id):
@@ -68,13 +67,3 @@ def search(request : HttpRequest):
         return render(request, "main/search_page.html", {"searched" : searched, "posts" : posts})
     else :
         return render(request, "main/search_page.html")
-
-
-def add_review(request : HttpRequest, blog_id):
-
-    if request.method == "POST":
-        blog = Post.objects.get(id=blog_id)
-        new_comment = Comment(post=blog, name=request.POST["name"], content = request.POST["content"])
-        new_comment.save()
-
-    return redirect("main:details_page", blog_id=blog_id)
